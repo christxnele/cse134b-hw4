@@ -540,16 +540,15 @@ h2 {
 }
 
 .contact-form label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* small muted helper text between a label and its field */
 .contact-form .hint {
     margin: 0;
     font-size: 0.75rem;
-    color: var(--color-muted);
+    color: var(--color-text);
 }
 
 .contact-form input,
@@ -563,12 +562,28 @@ h2 {
     border: 1px solid var(--color-text);
     border-radius: var(--radius);
     padding: 0.6em 0.9em;
+    padding-right: 3rem;
 }
 
 .contact-form textarea {
     min-height: 8rem;
     resize: vertical;
 }
+
+.contact-form input:user-invalid,
+.contact-form textarea:user-invalid {
+    border: 1px dashed red;
+    background-image: url(media/warning.svg);
+    background-repeat: no-repeat;
+    background-size: 1.5em;
+    background-position: right 1rem center;
+}
+
+.contact-form textarea:user-invalid {
+    background-position: right 1rem bottom 1rem ;
+}
+
+
 
 .contact-form button {
     justify-self: end;

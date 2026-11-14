@@ -1,7 +1,7 @@
 | Field | Value |
 | --- | --- |
-| Repository URL | https://github.com/christxnele/cse134b-hw3-part1 |
-| HW 4 Deployed URL | 
+| Repository URL | https://github.com/christxnele/cse134b-hw4 |
+| HW 4 Deployed URL | https://christxnele.github.io/cse134b-hw4/index.html |
 
 # CSE 134B - HW 4
 
