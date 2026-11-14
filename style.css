@@ -514,6 +514,79 @@ h2 {
     color: var(--color-nav);
 }
 
+/* HW4 CONTACT FORM (no js) */
+.contact-form {
+    padding: 3rem var(--page-gutter) 4rem;
+}
+
+.contact-form h1 {
+    text-align: center;
+}
+
+/* one column grid so each label sits above its control */
+.contact-form form {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 36rem;
+    margin: 2rem auto 0;
+    background-color: var(--color-band);
+    border: 1px solid var(--color-text);
+    padding: 1.5rem 2rem;
+}
+
+/* extra space between each label + field pair */
+.contact-form label:not(:first-child) {
+    margin-top: 0.8rem;
+}
+
+.contact-form label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* small muted helper text between a label and its field */
+.contact-form .hint {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+}
+
+.contact-form input,
+.contact-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-text);
+    border-radius: var(--radius);
+    padding: 0.6em 0.9em;
+}
+
+.contact-form textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.contact-form button {
+    justify-self: end;
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--color-nav-text);
+    background-color: var(--color-nav);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.35em 1.4em;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: var(--color-text);
+}
+
 /* EXPERIENCE PAGE */
 .experience-page {
     padding: 3rem var(--page-gutter);
@@ -1349,7 +1422,8 @@ tool-tag {
         font-size: 3rem;
     }
 
-    .contact-layout form {
+    .contact-layout form,
+    .contact-form form {
         padding: 1rem;
     }
 }
