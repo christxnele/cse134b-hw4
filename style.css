@@ -6,15 +6,58 @@
     --color-bg: #f2f1e8;
     --color-nav: #728156;
     --color-nav-text: #f3efdc;
+    /* green used as TEXT / outlines on the page bg (link hovers, list markers, focus rings).
+       separate from --color-nav so the dark theme can darken the nav fill without losing contrast */
+    --color-accent: #728156;
     --color-text-green: #7D8778;
     --color-text: #4a4a44;
     --color-muted: #7a7a72;
     --color-frame-fill: #e8eedc;
     --color-band: #e9e8dd;
     --color-tag: #d5e0bf;
+    --color-nav-hover: #c6c3ad;
+    --color-nav-border: rgb(111, 110, 110);
+    --color-shadow: rgb(162, 162, 162);
+    /* form message colors */
+    --color-error-bg: #fbe9e7;
+    --color-error-border: #b3261e;
+    --color-error-text: #7a1c15;
+    --color-warn-bg: #fdf3d8;
+    --color-warn-text: #5c4300;
+    --color-warn-fill: #b07d00;
+    --color-limit-bg: #fbe3d0;
+    --color-limit-text: #7a2e0a;
+    --color-limit-fill: #a14a1a;
+    --color-invalid: red;
     --font-size-body: 1rem;
-    --page-gutter: 15rem;
+    --page-gutter: 10rem;
     --radius: 14px;
+}
+
+/* dark theme: only colors change. nav green + nav text stay the same */
+:root[data-theme="dark"] {
+    --color-bg: #262822;
+    --color-nav: #56623f;
+    --color-accent: #a3ad98;
+    --color-band: #2f322b;
+    --color-frame-fill: #323a29;
+    --color-text: #d6d3c4;
+    --color-muted: #a09f93;
+    --color-text-green: #a3ad98;
+    --color-tag: #3f4a35;
+    --color-nav-border: #3c3f37;
+    --color-shadow: rgb(0 0 0 / 0.5);
+    --color-error-bg: #3a1f1c;
+    --color-error-border: #e0786e;
+    --color-error-text: #f4c7c1;
+    --color-warn-bg: #3a3018;
+    --color-warn-text: #f0d58a;
+    --color-warn-fill: #d4a531;
+    --color-limit-bg: #3d2617;
+    --color-limit-text: #f2b48e;
+    --color-limit-fill: #e07b3c;
+    --color-invalid: #ff6b5e;
+    color-scheme: dark;
 }
 body {
     margin: 0;
@@ -29,7 +72,7 @@ body {
 a:focus-visible, button:focus-visible,
 input:focus-visible, textarea:focus-visible,
 select:focus-visible {
-    outline: 3px dashed var(--color-nav);
+    outline: 3px dashed var(--color-accent);
     outline-offset: 3px;
 }
 
@@ -38,8 +81,8 @@ select:focus-visible {
     font-family: var(--font-display);
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(111, 110, 110);
-    box-shadow: 0px 4px 25px 1px rgb(162, 162, 162);
+    border-bottom: 1px solid var(--color-nav-border);
+    box-shadow: 0px 4px 25px 1px var(--color-shadow);
     background-color: var(--color-nav);
     align-items: center;
     padding: 0rem var(--page-gutter);
@@ -65,7 +108,7 @@ select:focus-visible {
 }
 
 .nav a:hover{
-    color: #c6c3ad;
+    color: var(--color-nav-hover);
 }
 
 .nav a.active {
@@ -73,7 +116,8 @@ select:focus-visible {
     text-underline-offset: 6px;
 }
 
-.nav a:focus-visible {
+.nav a:focus-visible,
+.nav button:focus-visible {
     outline-color: var(--color-nav-text);
 }
 
@@ -91,6 +135,49 @@ select:focus-visible {
 .nav .resume-link:hover {
     background-color: var(--color-bg);
     color: var(--color-text-green);
+}
+
+/* THEME TOGGLE: outlined icon button that matches the resume btn.
+   no display value on .theme-item so its hidden attribute keeps it invisible without js */
+.theme-toggle {
+    display: grid;
+    place-items: center;
+    background: transparent;
+    color: var(--color-nav-text);
+    border: 2px solid var(--color-nav-text);
+    border-radius: var(--radius);
+    padding: 0.35em 0.6em;
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--color-bg);
+    color: var(--color-text-green);
+}
+
+/* icons are drawn with lines that use the button's text color */
+.theme-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* light theme shows the moon (switch to dark), dark theme shows the sun (switch to light) */
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
 }
 
 
@@ -214,7 +301,7 @@ footer a {
 }
 
 footer a:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* keep icons text sized */
@@ -339,7 +426,7 @@ h2 {
 }
 
 .hobby-grid a:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* CONTACT PAGE */
@@ -443,7 +530,7 @@ h2 {
 }
 
 .contact-layout input[type="radio"]:focus-visible + label {
-    outline: 3px dashed var(--color-nav);
+    outline: 3px dashed var(--color-accent);
     outline-offset: 3px;
 }
 
@@ -511,7 +598,7 @@ h2 {
 }
 
 .contact-layout dd a:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* HW4 CONTACT FORM (no js) */
@@ -576,9 +663,9 @@ h2 {
 }
 
 .contact-form .error {
-    background-color: #fbe9e7;
-    border: 1px solid #b3261e;
-    color: #7a1c15;
+    background-color: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
+    color: var(--color-error-text);
 }
 
 .contact-form .error ul {
@@ -629,17 +716,17 @@ h2 {
 
 /* near the limit: amber + bold text, bar nearly full */
 .contact-form .information.warning {
-    --progress-fill: #b07d00;
-    background-color: #fdf3d8;
-    color: #5c4300;
+    --progress-fill: var(--color-warn-fill);
+    background-color: var(--color-warn-bg);
+    color: var(--color-warn-text);
     font-weight: bold;
 }
 
 /* at the limit: rust + bold text, bar completely full */
 .contact-form .information.at-limit {
-    --progress-fill: #a14a1a;
-    background-color: #fbe3d0;
-    color: #7a2e0a;
+    --progress-fill: var(--color-limit-fill);
+    background-color: var(--color-limit-bg);
+    color: var(--color-limit-text);
     font-weight: bold;
 }
 
@@ -664,7 +751,7 @@ h2 {
 
 .contact-form input:user-invalid,
 .contact-form textarea:user-invalid {
-    border: 1px dashed red;
+    border: 1px dashed var(--color-invalid);
     background-image: url(media/warning.svg);
     background-repeat: no-repeat;
     background-size: 1.2em;
@@ -764,7 +851,7 @@ h2 {
 }
 
 .company a:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 .dates,
@@ -791,7 +878,7 @@ h2 {
 }
 
 .experience-page article li::marker {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* custom elem */
@@ -838,7 +925,7 @@ tool-tag {
 }
 
 .back-link:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 .hobbies-intro {
@@ -1189,7 +1276,7 @@ tool-tag {
 }
 
 .proj-view-link a:hover {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* PROJECT DETAIL PAGES */
@@ -1331,7 +1418,7 @@ tool-tag {
 }
 
 .proj-context li::marker {
-    color: var(--color-nav);
+    color: var(--color-accent);
 }
 
 /* award callout w/ green bar */
@@ -1542,5 +1629,27 @@ tool-tag {
     .contact-layout form,
     .contact-form form {
         padding: 1rem;
+    }
+}
+
+/* PAGE TRANSITIONS (View Transition API, cross-document)
+   only opted in when the user hasn't asked for reduced motion, so with
+   reduced motion on, links still navigate normally just with no animation.
+   browsers without the API ignore this and navigate normally too */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    /* give the nav its own snapshot. it's identical on every page,
+       so it stays still while only the page content cross-fades */
+    .nav {
+        view-transition-name: site-nav;
+    }
+
+    /* slightly slower than the default fade so the change is easy to follow */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation-duration: 0.35s;
     }
 }
